@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKIES — Weather</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">SKIES</div>
+      <nav class="site-nav">
+        <a href="#" class="nav-link active">Today</a>
+        <a href="#" class="nav-link" id="nav-forecast">Forecast</a>
+        <a href="#" class="nav-link" id="nav-about">About</a>
+      </nav>
+      <button class="unit-toggle" id="unitToggle">°C / °F</button>
+    </div>
+  </header>
+
+  <!-- HERO SEARCH -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Real-time weather data</p>
+      <h1 class="hero-title">What's the sky<br/>doing today?</h1>
+      <form class="search-form" id="searchForm">
+        <input
+          type="text"
+          id="cityInput"
+          class="search-input"
+          placeholder="Enter city name..."
+          autocomplete="off"
+        />
+        <button type="submit" class="search-btn">
+          <span>Search</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/><line x1="10.5" y1="10.5" x2="14" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </form>
+      <button class="location-btn" id="locationBtn">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 1v1.5M7 11.5V13M1 7h1.5M11.5 7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Use my location
+      </button>
+    </div>
+  </section>
+
+  <!-- WEATHER DISPLAY -->
+  <section class="weather-display" id="weatherDisplay" style="display:none;">
+
+    <!-- MAIN CARD -->
+    <div class="container">
+      <div class="weather-main">
+        <div class="location-block">
+          <div class="location-tag">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="5" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 1C3.79 1 2 2.79 2 5c0 3 4 7 4 7s4-4 4-7c0-2.21-1.79-4-4-4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <span id="cityName">—</span>, <span id="countryName">—</span>
+          </div>
+          <p class="local-time" id="localTime">—</p>
+        </div>
+
+        <div class="temp-block">
+          <div class="temp-giant" id="tempDisplay">—</div>
+          <div class="condition-block">
+            <img id="weatherIcon" src="" alt="weather" class="weather-icon" />
+            <span id="conditionText">—</span>
+          </div>
+        </div>
+
+        <div class="feels-like">Feels like <span id="feelsLike">—</span></div>
+      </div>
+
+      <!-- STATS ROW -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Humidity</div>
+          <div class="stat-value" id="humidity">—</div>
+          <div class="stat-bar"><div class="stat-fill" id="humidityBar"></div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wind</div>
+          <div class="stat-value" id="windSpeed">—</div>
+          <div class="stat-unit">km/h</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Visibility</div>
+          <div class="stat-value" id="visibility">—</div>
+          <div class="stat-unit">km</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pressure</div>
+          <div class="stat-value" id="pressure">—</div>
+          <div class="stat-unit">hPa</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">UV Index</div>
+          <div class="stat-value" id="uvIndex">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Dew Point</div>
+          <div class="stat-value" id="dewPoint">—</div>
+        </div>
+      </div>
+
+      <!-- SUN TIMES -->
+      <div class="sun-row">
+        <div class="sun-item">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.34 4.34l1.42 1.42M14.24 14.24l1.42 1.42M4.34 15.66l1.42-1.42M14.24 5.76l1.42-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="sun-label">Sunrise</span>
+          <span class="sun-time" id="sunrise">—</span>
+        </div>
+        <div class="sun-line"></div>
+        <div class="sun-item">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15.5 10.5A5.5 5.5 0 0 1 7 7a5.5 5.5 0 0 0 5.5 8 5.5 5.5 0 0 0 3-8.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <span class="sun-label">Sunset</span>
+          <span class="sun-time" id="sunset">—</span>
+        </div>
+      </div>
+
+      <!-- 5-DAY FORECAST -->
+      <div class="forecast-section" id="forecastSection">
+        <h2 class="section-title">5-Day Forecast</h2>
+        <div class="forecast-row" id="forecastRow">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ERROR TOAST -->
+  <div class="toast" id="errorToast"></div>
+
+  <!-- LOADING -->
+  <div class="loader" id="loader" style="display:none;">
+    <div class="loader-ring"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-logo">SKIES</span>
+      <span class="footer-credit">Powered by <a href="https://open-meteo.com" target="_blank">Open-Meteo</a> &amp; <a href="https://openweathermap.org" target="_blank">OpenWeatherMap</a></span>
+      <span class="footer-copy">© 2025</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
